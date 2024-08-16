@@ -45,9 +45,9 @@
             // 
             this.labelControl2.Location = new System.Drawing.Point(314, 219);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(49, 13);
+            this.labelControl2.Size = new System.Drawing.Size(21, 13);
             this.labelControl2.TabIndex = 1;
-            this.labelControl2.Text = "DENEME 2";
+            this.labelControl2.Text = "SON";
             // 
             // Form1
             // 
