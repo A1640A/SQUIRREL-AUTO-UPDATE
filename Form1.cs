@@ -28,19 +28,9 @@ namespace SQUIRREL_AUTO_UPDATE
             this.Text += $" v.{versionInfo.FileVersion}";
         }
 
-        async void CheckForUpdates()
+        void CheckForUpdates()
         {
-            try
-            {
-                using (var mgr=await UpdateManager.GitHubUpdateManager("https://github.com/A1640A/SQUIRREL-AUTO-UPDATE"))
-                {
-                    var release = await mgr.UpdateApp();
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show($"Failed to check for updates. \n\n {exc.Message}");
-            }
+            new frmUpdate().ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)
