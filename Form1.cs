@@ -32,7 +32,7 @@ namespace SQUIRREL_AUTO_UPDATE
         {
             try
             {
-                using (var mgr=await UpdateManager.GitHubUpdateManager("github"))
+                using (var mgr=await UpdateManager.GitHubUpdateManager("https://github.com/A1640A/SQUIRREL-AUTO-UPDATE"))
                 {
                     var release = await mgr.UpdateApp();
                 }
