@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // denetlenir. Bütünleştirilmiş kod ile ilişkili bilgileri değiştirmek için
 // bu öznitelik değerlerini değiştirin.
 [assembly: AssemblyTitle("SQUIRREL AUTO UPDATE")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SQUIRREL AUTO UPDATE")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP")]
+[assembly: AssemblyCompany("Ömer Dursun")]
 [assembly: AssemblyProduct("SQUIRREL AUTO UPDATE")]
 [assembly: AssemblyCopyright("Copyright © HP 2024")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Tüm değerleri belirtebilir veya varsayılan Derleme ve Düzeltme Numaralarını kullanmak için
 // aşağıda gösterildiği gibi '*' kullanabilirsiniz:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1")]
+[assembly: AssemblyFileVersion("1.0.1")]
