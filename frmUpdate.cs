@@ -19,6 +19,7 @@ namespace SQUIRREL_AUTO_UPDATE
         {
             InitializeComponent();
             this.progressPanel1.AutoHeight = true;
+            CheckForIllegalCrossThreadCalls = false;
 
             SetCaption("Uygulama başlatılıyor...");
             SetDescription("Lütfen bekleyiniz...");
@@ -57,36 +58,47 @@ namespace SQUIRREL_AUTO_UPDATE
         {
             try
             {
-                using (var updateManager = new UpdateManager("https://github.com/A1640A/SQUIRREL-AUTO-UPDATE"))
+                // Wait Form'u başlat
+                SetCaption("Güncellemeler kontrol ediliyor...");
+
+                using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/A1640A/SQUIRREL-AUTO-UPDATE"))
                 {
-                    var updateInfo = await updateManager.CheckForUpdate();
+                    // Güncellemeleri kontrol et
+                    var updateInfo = await updateManager.CheckForUpdate(ignoreDeltaUpdates: false,
+                        progress: (percentage) => SetProgress(percentage, "Güncellemeler kontrol ediliyor..."));
 
-                    if (updateInfo.ReleasesToApply.Any() && updateInfo.ReleasesToApply.First().Version != updateManager.CurrentlyInstalledVersion())
+                    if (updateInfo.ReleasesToApply != null && updateInfo.ReleasesToApply.Any())
                     {
-                        SetCaption("Yeni versiyon bulundu.");
-                        var downloadUpdate = MessageBox.Show($"SquirrelAutoUpdate v.{updateInfo.ReleasesToApply.First().Version} mevcut.\n\nŞimdi güncellemek ister misiniz ?", "SquirrelAutoUpdate", MessageBoxButtons.YesNo);
-                        if (downloadUpdate == DialogResult.Yes)
-                        {
-                            SetCaption("Dosyalar indiriliyor...");
+                        SetCaption("Güncellemeler indiriliyor...");
 
-                            var newRelease = await updateManager.UpdateApp();
+                        // Güncellemeleri indir ve ilerlemeyi göster
+                        var newRelease = await updateManager.UpdateApp(progress: (percentage) => SetProgress(percentage, "Güncellemeler indiriliyor..."));
 
-                            SetCaption("Uygulama güncellendi.");
-                            SetDescription("Lütfen bekleyiniz...");
+                        SetCaption("Uygulama güncellendi.");
+                        SetDescription("Lütfen bekleyiniz...");
 
-                            Application.Restart();
-                        }
+                        Application.Restart();
+                    }
+                    else
+                    {
+                        SetCaption("Güncel versiyonu kullanıyorsunuz.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Uygulama güncellenirken hata oluştu.");
+                MessageBox.Show($"Uygulama güncellenirken bir hata oluştu: \n\n{ex.ToString()}", "Güncelleme Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 Close();
             }
+        }
+
+        // İlerleme yüzdesini gösteren yardımcı metot
+        private void SetProgress(int percentage, string description)
+        {
+            SetDescription($"{description} %{percentage}");
         }
     }
 }
