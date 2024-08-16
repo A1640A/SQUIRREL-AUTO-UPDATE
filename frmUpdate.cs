@@ -18,7 +18,6 @@ namespace SQUIRREL_AUTO_UPDATE
         public frmUpdate()
         {
             InitializeComponent();
-            this.progressPanel1.AutoHeight = true;
             CheckForIllegalCrossThreadCalls = false;
 
             SetCaption("Uygulama başlatılıyor...");
