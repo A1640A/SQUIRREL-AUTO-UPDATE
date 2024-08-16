@@ -46,6 +46,7 @@ namespace SQUIRREL_AUTO_UPDATE
         private void Form1_Load(object sender, EventArgs e)
         {
             SetVersionTitle();
+            CheckForUpdates();
         }
     }
 }
