@@ -76,7 +76,7 @@ namespace SQUIRREL_AUTO_UPDATE
                         SetCaption("Uygulama güncellendi.");
                         SetDescription("Lütfen bekleyiniz...");
 
-                        Application.Restart();
+                        Application.Exit();
                     }
                     else
                     {
